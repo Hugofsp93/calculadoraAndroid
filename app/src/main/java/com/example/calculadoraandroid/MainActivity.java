@@ -6,6 +6,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.calculadoraandroid.calculadora.Calculadora;
 import com.example.calculadoraandroid.calculadora.Operacao;
@@ -19,7 +21,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide(); // tirar a barra padrão de cima
         this.visor = (TextView) findViewById(R.id.editText);
         this.visorPrincipal = (TextView) findViewById(R.id.editText2);
         atualizarVisor();
