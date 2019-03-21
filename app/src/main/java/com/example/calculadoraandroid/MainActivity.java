@@ -74,18 +74,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonUm(View view) {
+
         setCaracter('1');
     }
 
     public void handleButtonDois(View view) {
+
         setCaracter('2');
     }
 
     public void handleButtonTres(View view) {
+
         setCaracter('3');
     }
 
     public void handleButtonQuatro(View view) {
+
         setCaracter('4');
     }
 
@@ -97,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
         setCaracter('6');
     }
 
-    public void handleButtonSete(View view) {
-        setCaracter('7');
-    }
+    public void handleButtonSete(View view) { setCaracter('7'); }
 
     public void handleButtonOito(View view) {
         setCaracter('8');

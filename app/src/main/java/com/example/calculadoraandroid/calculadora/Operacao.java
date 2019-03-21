@@ -5,7 +5,7 @@ public enum Operacao {
     ADICAO(" + "),
     SUBTRACAO(" - "),
     MULTIPLICACAO(" × "),
-    DIVISAO(" ÷ "),
+    DIVISAO(" / "), // ÷
     PORCENTAGEM(" % ");
 
     private String texto = "";

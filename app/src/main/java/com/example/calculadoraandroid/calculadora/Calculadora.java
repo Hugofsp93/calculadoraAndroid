@@ -28,10 +28,11 @@ public class Calculadora implements Serializable {
     }
 
     public void setOperacao(Operacao operacao) {
+
         this.operacao = operacao;
     }
 
-    public String getValorTexto() {
+    public String getValorTexto(){
         String op1 = operador1.getValorTexto();
         String op2 = operador2.getValorTexto();
 
@@ -43,6 +44,17 @@ public class Calculadora implements Serializable {
             texto += op1 + operacao;
         } else {
             texto += op1 + operacao + op2;
+            char[] aux= (op1 + operacao + op2).toCharArray();
+            operador1 = null;
+            operador1 = new Operador();
+            for(int i = 0; i < aux.length; i++){
+                try {
+                    operador1.setCaracter(aux[i]);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
 
         return texto;
@@ -82,6 +94,9 @@ public class Calculadora implements Serializable {
         } else {
             throw new UnsupportedOperationException("Operação não implementada.");
         }
+
+        operacao = null;
+
         return nf.format(resultado);
     }
 
