@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             visorPrincipal.setText(calculadora.getValorTextoPrincipal());
         } else {
             visor.setText("");
-            visorPrincipal.setText("0");
+            visorPrincipal.setText("");
         }
     }
 
@@ -75,7 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void handleButtonVirgula(View view) {
         if(!calculadora.getFinalizado()) {
-            setCaracter(',');
+            if (!calculadora.getValorTextoPrincipal().contains(",")) {
+                if (calculadora.getValorTextoPrincipal().length() != 0) {
+                    setCaracter(',');
+                } else {
+                    setCaracter('0');
+                    setCaracter(',');
+                }
+            }
         }
     }
 
@@ -125,8 +132,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonZero(View view) {
-
-        setCaracter('0');
+        if (calculadora.getValorTextoPrincipal().length() != 0) {
+            setCaracter('0');
+        }
     }
 
 
@@ -178,10 +186,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonDesfazer(View view) {
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             try {
-                calculadora.removerUltimoCaracter();
-                atualizarVisor();
+                if (calculadora.getValorTextoPrincipal().length() == 1) {
+                    handleButtonLimpar(view);
+                } else {
+                    calculadora.removerUltimoCaracter();
+                    atualizarVisor();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(getBaseContext(), "Ocorreu um erro!", Toast.LENGTH_SHORT).show();
