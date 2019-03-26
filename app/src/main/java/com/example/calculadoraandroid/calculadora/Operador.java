@@ -15,7 +15,7 @@ public class Operador implements Serializable {
     }
 
     public void setCaracter(char caracter) throws ParseException {
-        if (texto == "0" && caracter != ',' && caracter != '0') {
+        if (texto == "0" && caracter != ',') {
             texto = Character.toString(caracter);
         } else {
             texto += caracter;

@@ -142,9 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void handleButtonZero(View view) {
         if(!calculadora.getFinalizado()) {
-            if (calculadora.getValorTextoPrincipal().length() != 0) {
-                setCaracter('0');
-            }
+            setCaracter('0');
         }
     }
 
