@@ -73,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
         atualizarVisor();
     }
 
+    public void handleButtonVirgula(View view) {
+        if(!calculadora.getFinalizado()) {
+            setCaracter(',');
+        }
+    }
+
     public void handleButtonUm(View view) {
 
         setCaracter('1');
@@ -94,54 +100,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonCinco(View view) {
+
         setCaracter('5');
     }
 
     public void handleButtonSeis(View view) {
+
         setCaracter('6');
     }
 
-    public void handleButtonSete(View view) { setCaracter('7'); }
+    public void handleButtonSete(View view) {
+
+        setCaracter('7');
+    }
 
     public void handleButtonOito(View view) {
+
         setCaracter('8');
     }
 
     public void handleButtonNove(View view) {
+
         setCaracter('9');
     }
 
     public void handleButtonZero(View view) {
+
         setCaracter('0');
     }
 
-    public void handleButtonSoma(View view) {
-        setOperacao(Operacao.ADICAO);
+
+    public void handleButtonSoma (View view){
+
+        if(!calculadora.getFinalizado()) {
+            setOperacao(Operacao.ADICAO);
+        }
     }
 
-    public void handleButtonSubtrai(View view) {
-        setOperacao(Operacao.SUBTRACAO);
+    public void handleButtonSubtrai (View view){
+
+        if(!calculadora.getFinalizado()) {
+            setOperacao(Operacao.SUBTRACAO);
+        }
     }
 
-    public void handleButtonMultiplica(View view) {
-        setOperacao(Operacao.MULTIPLICACAO);
+    public void handleButtonMultiplica (View view){
+
+        if(!calculadora.getFinalizado()) {
+            setOperacao(Operacao.MULTIPLICACAO);
+        }
     }
 
-    public void handleButtonDivide(View view) {
-        setOperacao(Operacao.DIVISAO);
+    public void handleButtonDivide (View view){
+
+        if(!calculadora.getFinalizado()) {
+            setOperacao(Operacao.DIVISAO);
+        }
     }
 
-    public void handleButtonPorcentagem(View view) {
-        setOperacao(Operacao.PORCENTAGEM);
-    }
+    public void handleButtonPorcentagem (View view){
 
-    public void handleButtonVirgula(View view) {
-        setCaracter(',');
+        if(!calculadora.getFinalizado()) {
+            setOperacao(Operacao.PORCENTAGEM);
+        }
     }
 
     public void handleButtonResultado(View view) {
-        calculadora.calcular();
-        atualizarVisor();
+        if(!calculadora.getFinalizado()) {
+            calculadora.calcular();
+            atualizarVisor();
+        }
     }
 
     public void handleButtonLimpar(View view) {
@@ -150,12 +178,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonDesfazer(View view) {
-        try {
-            calculadora.removerUltimoCaracter();
-            atualizarVisor();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getBaseContext(), "Ocorreu um erro!", Toast.LENGTH_SHORT).show();
+        if(!calculadora.getFinalizado()) {
+            try {
+                calculadora.removerUltimoCaracter();
+                atualizarVisor();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getBaseContext(), "Ocorreu um erro!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

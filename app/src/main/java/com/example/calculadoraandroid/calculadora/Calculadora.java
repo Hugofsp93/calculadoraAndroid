@@ -6,24 +6,43 @@ import java.text.ParseException;
 
 public class Calculadora implements Serializable {
 
-    private Operador operador1 = new Operador();
-    private Operador operador2 = new Operador();
-    private Operacao operacao = null;
-    private boolean finalizado = false;
+    private Operador operador1;
+    private Operador operador2;
+    private Operador resultado;
+    private Operacao operacao;
+    private boolean finalizado;
     private NumberFormat nf = NumberFormat.getNumberInstance();
 
+    public Calculadora(){
+        this.operador1 = new Operador();
+        this.operador2 = new Operador();
+        this.resultado = new Operador();
+        this.operacao = null;
+        this.finalizado = false;
+    }
+
+    public boolean getFinalizado() {
+        return this.finalizado;
+    }
+
     public void setCaracter(char caracter) throws ParseException {
-        if(finalizado) {
-            operador1 = new Operador();
-            operador2 = new Operador();
-            operacao = null;
-            finalizado = false;
+        if(this.finalizado) {
+            this.operador1 = new Operador();
+            this.operador2 = new Operador();
+            this.resultado = new Operador();
+
+            this.operacao = null;
+            this.finalizado = false;
         }
 
-        if (operacao == null) {
-            operador1.setCaracter(caracter);
-        } else if (!finalizado) {
-            operador2.setCaracter(caracter);
+        if (this.operacao == null) {
+            this.operador1.setCaracter(caracter);
+        } else if (!this.finalizado) {
+            this.operador2.setCaracter(caracter);
+        } else if (this.operacao != null && this.resultado.getValor() != null) {
+            this.operador1.setValor(resultado.getValor());
+            this.resultado.setValor(0.0);
+            this.operador2.setValor(0.0);
         }
     }
 
@@ -33,42 +52,32 @@ public class Calculadora implements Serializable {
     }
 
     public String getValorTexto(){
-        String op1 = operador1.getValorTexto();
-        String op2 = operador2.getValorTexto();
+        String op1 = this.operador1.getValorTexto();
+        String op2 = this.operador2.getValorTexto();
+        String resultado = this.resultado.getValorTexto();
 
         String texto = "";
 
-        if (operacao == null) {
+        if (this.operacao == null) {
             texto += "";
-        } else if (!finalizado) {
-            texto += op1 + operacao;
+        } else if (!this.finalizado) {
+            texto += op1 + this.operacao;
         } else {
-            texto += op1 + operacao + op2;
-            char[] aux= (op1 + operacao + op2).toCharArray();
-            operador1 = null;
-            operador1 = new Operador();
-            for(int i = 0; i < aux.length; i++){
-                try {
-                    operador1.setCaracter(aux[i]);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
+            texto += op1 + this.operacao + op2;
         }
 
         return texto;
     }
 
     public String getValorTextoPrincipal() {
-        String op1 = operador1.getValorTexto();
-        String op2 = operador2.getValorTexto();
+        String op1 = this.operador1.getValorTexto();
+        String op2 = this.operador2.getValorTexto();
 
         String texto = "";
 
-        if (operacao == null) {
+        if (this.operacao == null) {
             texto += op1;
-        } else if (!finalizado) {
+        } else if (!this.finalizado) {
             texto += op2;
         } else {
             texto += getResultado();
@@ -78,24 +87,25 @@ public class Calculadora implements Serializable {
     }
 
     public String getResultado() {
-        double op1 = operador1.getValor();
-        double op2 = operador2.getValor();
+        double op1 = this.operador1.getValor();
+        double op2 = this.operador2.getValor();
         double resultado = 0;
-        if (operacao == Operacao.ADICAO) {
+        if (this.operacao == Operacao.ADICAO) {
             resultado = op1 + op2;
-        } else if (operacao == Operacao.SUBTRACAO) {
+        } else if (this.operacao == Operacao.SUBTRACAO) {
             resultado = op1 - op2;
-        } else if (operacao == Operacao.MULTIPLICACAO) {
+        } else if (this.operacao == Operacao.MULTIPLICACAO) {
             resultado = op1 * op2;
-        } else if (operacao == Operacao.DIVISAO) {
+        } else if (this.operacao == Operacao.DIVISAO) {
             resultado = op1 / op2;
-        } else if (operacao == Operacao.PORCENTAGEM) {
+        } else if (this.operacao == Operacao.PORCENTAGEM) {
             resultado = op1 * op2 / 100;
         } else {
             throw new UnsupportedOperationException("Operação não implementada.");
         }
 
-        operacao = null;
+        this.resultado.setValor(resultado);
+        this.operacao = null;
 
         return nf.format(resultado);
     }
@@ -105,10 +115,10 @@ public class Calculadora implements Serializable {
     }
 
     public void removerUltimoCaracter() throws ParseException {
-        if (operacao == null) {
-            operador1.removerUltimoCaracter();
-        } else if (!finalizado) {
-            operador2.removerUltimoCaracter();
+        if (this.operacao == null) {
+            this.operador1.removerUltimoCaracter();
+        } else if (!this.finalizado) {
+            this.operador2.removerUltimoCaracter();
         }
     }
 

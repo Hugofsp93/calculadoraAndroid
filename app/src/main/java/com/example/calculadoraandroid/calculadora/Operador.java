@@ -6,9 +6,13 @@ import java.text.ParseException;
 
 public class Operador implements Serializable {
 
-    private double valor = 0;
+    private Double valor = 0.0;
     private String texto = "";
     private NumberFormat nf = NumberFormat.getNumberInstance();
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
 
     public void setCaracter(char caracter) throws ParseException {
         texto += caracter;
@@ -16,10 +20,12 @@ public class Operador implements Serializable {
     }
 
     public String getValorTexto() {
+
         return nf.format(this.valor);
     }
 
-    public double getValor() {
+    public Double getValor() {
+
         return this.valor;
     }
 
@@ -29,7 +35,7 @@ public class Operador implements Serializable {
             valor = nf.parse(texto).doubleValue();
         } else {
             texto = "0";
-            valor = 0;
+            valor = 0.0;
         }
     }
 }
