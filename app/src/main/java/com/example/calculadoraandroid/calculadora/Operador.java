@@ -21,7 +21,7 @@ public class Operador implements Serializable {
 
     public String getValorTexto() {
 
-        return nf.format(this.valor);
+        return this.texto;
     }
 
     public Double getValor() {
