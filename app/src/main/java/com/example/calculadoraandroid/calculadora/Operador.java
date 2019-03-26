@@ -7,7 +7,7 @@ import java.text.ParseException;
 public class Operador implements Serializable {
 
     private Double valor = 0.0;
-    private String texto = "";
+    private String texto = "0";
     private NumberFormat nf = NumberFormat.getNumberInstance();
 
     public void setValor(Double valor) {
@@ -15,7 +15,12 @@ public class Operador implements Serializable {
     }
 
     public void setCaracter(char caracter) throws ParseException {
-        texto += caracter;
+        if (texto == "0" && caracter != ',' && caracter != '0') {
+            texto = Character.toString(caracter);
+        } else {
+            texto += caracter;
+
+        }
         valor = nf.parse(texto).doubleValue();
     }
 
