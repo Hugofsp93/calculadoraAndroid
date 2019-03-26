@@ -87,94 +87,105 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonUm(View view) {
-
-        setCaracter('1');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('1');
+        }
     }
 
     public void handleButtonDois(View view) {
-
-        setCaracter('2');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('2');
+        }
     }
 
     public void handleButtonTres(View view) {
-
-        setCaracter('3');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('3');
+        }
     }
 
     public void handleButtonQuatro(View view) {
-
-        setCaracter('4');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('4');
+        }
     }
 
     public void handleButtonCinco(View view) {
-
-        setCaracter('5');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('5');
+        }
     }
 
     public void handleButtonSeis(View view) {
-
-        setCaracter('6');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('6');
+        }
     }
 
     public void handleButtonSete(View view) {
-
-        setCaracter('7');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('7');
+        }
     }
 
     public void handleButtonOito(View view) {
-
-        setCaracter('8');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('8');
+        }
     }
 
     public void handleButtonNove(View view) {
-
-        setCaracter('9');
+        if(!calculadora.getFinalizado()) {
+            setCaracter('9');
+        }
     }
 
     public void handleButtonZero(View view) {
-        if (calculadora.getValorTextoPrincipal().length() != 0) {
-            setCaracter('0');
+        if(!calculadora.getFinalizado()) {
+            if (calculadora.getValorTextoPrincipal().length() != 0) {
+                setCaracter('0');
+            }
         }
     }
 
 
     public void handleButtonSoma (View view){
 
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             setOperacao(Operacao.ADICAO);
         }
     }
 
     public void handleButtonSubtrai (View view){
 
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             setOperacao(Operacao.SUBTRACAO);
         }
     }
 
     public void handleButtonMultiplica (View view){
 
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             setOperacao(Operacao.MULTIPLICACAO);
         }
     }
 
     public void handleButtonDivide (View view){
 
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             setOperacao(Operacao.DIVISAO);
         }
     }
 
     public void handleButtonPorcentagem (View view){
 
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             setOperacao(Operacao.PORCENTAGEM);
         }
     }
 
     public void handleButtonResultado(View view) {
-        if(!calculadora.getFinalizado()) {
+        if(!calculadora.getFinalizado() && !calculadora.getValorTextoPrincipal().isEmpty()) {
             calculadora.calcular();
             atualizarVisor();
         }
